@@ -1,4 +1,5 @@
 from tkinter import *
+from ctypes import *
 
 
 class GUIWindow:
@@ -17,7 +18,8 @@ class GUIWindow:
         self.close_button.grid(row=1, column=1)
 
     def greet(self):
-        print("Hello")
+        test = CDLL("./solver.so")
+        test.hello()
 
 
 def setWindow(root):
