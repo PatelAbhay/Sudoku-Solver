@@ -1,16 +1,26 @@
 from tkinter import *
-from tkinter.ttk import *
 from ctypes import *
 
 
 class GUIWindow:
     def __init__(self, root):
-        entries = []
-        for a in range(0, 360, 40):
-            for b in range(0, 360, 40):
-                temp = Entry(root)
-                temp.place(x=a, y=b, width=40, height=40)
-                entries.append(temp)
+
+        self.sudoku = []
+        for i in range(1, 10):
+            self.sudoku += [[0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+        for i in range(0, 9):
+            for j in range(0, 9):
+                if (i < 3 or i > 5) and (j < 3 or j > 5):
+                    color = 'gray'
+                elif i in [3, 4, 5] and j in [3, 4, 5]:
+                    color = 'gray'
+                else:
+                    color = 'white'
+
+                self.sudoku[i][j] = Entry(root, bg=color, cursor='arrow', borderwidth=0,
+                                          highlightcolor='yellow', highlightthickness=1, highlightbackground='black')
+                self.sudoku[i][j].grid(row=i, column=j, ipadx=10, ipady=10)
 
 
 def setWindow(root):
