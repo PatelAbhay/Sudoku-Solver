@@ -21,11 +21,15 @@ class GUIWindow:
         '''self.main_label.grid(row=0, column=1,
                              padx=((root.winfo_screenwidth()//2)*0.3, 0),
                              pady=((root.winfo_screenheight()//2)*0.125, 0))'''
-        self.main_label.grid(row=0, column=1)
-        self.start_button.grid(row=1, column=0,
-                               padx=(0, 0),
-                               pady=(0, 0))
-        self.close_button.grid(row=1, column=2)
+        self.main_label.grid(row=0, column=2, columnspan=2,
+                             padx=(0, (root.winfo_screenwidth()//2)*0.1),
+                             pady=((root.winfo_screenheight()//2)*0.125, 0))
+        self.start_button.grid(row=1, column=0, columnspan=2,
+                               padx=((root.winfo_screenwidth()//2)*0.1, 0),
+                               pady=((root.winfo_screenheight()//2)*0.125, 0))
+        self.close_button.grid(row=1, column=3,
+                               padx=((root.winfo_screenwidth()//2)*0.1, 0),
+                               pady=((root.winfo_screenheight()//2)*0.125, 0))
 
     def start(self):
         test = CDLL("./solver.so")
