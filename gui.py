@@ -1,25 +1,38 @@
 from tkinter import *
+from tkinter.ttk import *
 from ctypes import *
 
 
 class GUIWindow:
     def __init__(self, root):
         self.root = root
-        root.title("A simple GUI")
 
-        self.label = Label(root, text="Sudoku Solver")
+        self.main_label = Label(root, text="Sudoku Solver")
+        self.main_label.config(font=(DEFAULT_MODE, 32))
 
-        self.greet_button = Button(root, text="Greet", command=self.greet)
+        style = Style()
+        style.configure('TButton', font=('calibri', 20, 'bold'),
+                        borderwidth='4')
 
-        self.close_button = Button(root, text="Close", command=root.quit)
+        self.start_button = Button(root, text="START", command=self.start)
 
-        self.label.grid(columnspan=2, sticky=W)
-        self.greet_button.grid(row=1)
-        self.close_button.grid(row=1, column=1)
+        self.close_button = Button(root, text="INFO", command=self.info)
 
-    def greet(self):
+        '''self.main_label.grid(row=0, column=1,
+                             padx=((root.winfo_screenwidth()//2)*0.3, 0),
+                             pady=((root.winfo_screenheight()//2)*0.125, 0))'''
+        self.main_label.grid(row=0, column=1)
+        self.start_button.grid(row=1, column=0,
+                               padx=(0, 0),
+                               pady=(0, 0))
+        self.close_button.grid(row=1, column=2)
+
+    def start(self):
         test = CDLL("./solver.so")
         test.hello()
+
+    def info(self):
+        print("Need to implement this")
 
 
 def setWindow(root):
@@ -36,6 +49,7 @@ def setWindow(root):
     window_offset = str(x_offset) + "+" + str(y_offset)
 
     root.geometry(window_size + "+" + window_offset)
+    root.title("Sudoku Solver")
 
 
 root = Tk()
