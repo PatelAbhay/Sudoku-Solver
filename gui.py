@@ -4,7 +4,6 @@ from ctypes import *
 
 class GUIWindow:
     def __init__(self, root):
-
         self.sudoku = []
         for i in range(1, 10):
             self.sudoku += [[0, 0, 0, 0, 0, 0, 0, 0, 0]]
@@ -18,9 +17,14 @@ class GUIWindow:
                 else:
                     color = 'white'
 
-                self.sudoku[i][j] = Entry(root, bg=color, cursor='arrow', borderwidth=0,
+                self.sudoku[i][j] = Entry(root, width="4", bg=color, cursor='arrow', borderwidth=0,
                                           highlightcolor='yellow', highlightthickness=1, highlightbackground='black')
-                self.sudoku[i][j].grid(row=i, column=j, ipadx=10, ipady=10)
+                self.sudoku[i][j].grid(row=i, column=j, ipadx=10, ipady=14)
+
+    def isValidNum(S):
+        if S in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            return True
+        return False
 
 
 def setWindow(root):
