@@ -5,38 +5,12 @@ from ctypes import *
 
 class GUIWindow:
     def __init__(self, root):
-        self.root = root
-
-        self.main_label = Label(root, text="Sudoku Solver")
-        self.main_label.config(font=(DEFAULT_MODE, 32))
-
-        style = Style()
-        style.configure('TButton', font=('calibri', 20, 'bold'),
-                        borderwidth='4')
-
-        self.start_button = Button(root, text="START", command=self.start)
-
-        self.close_button = Button(root, text="INFO", command=self.info)
-
-        '''self.main_label.grid(row=0, column=1,
-                             padx=((root.winfo_screenwidth()//2)*0.3, 0),
-                             pady=((root.winfo_screenheight()//2)*0.125, 0))'''
-        self.main_label.grid(row=0, column=2, columnspan=2,
-                             padx=(0, (root.winfo_screenwidth()//2)*0.1),
-                             pady=((root.winfo_screenheight()//2)*0.125, 0))
-        self.start_button.grid(row=1, column=0, columnspan=2,
-                               padx=((root.winfo_screenwidth()//2)*0.1, 0),
-                               pady=((root.winfo_screenheight()//2)*0.125, 0))
-        self.close_button.grid(row=1, column=3,
-                               padx=((root.winfo_screenwidth()//2)*0.1, 0),
-                               pady=((root.winfo_screenheight()//2)*0.125, 0))
-
-    def start(self):
-        test = CDLL("./solver.so")
-        test.hello()
-
-    def info(self):
-        print("Need to implement this")
+        entries = []
+        for a in range(0, 360, 40):
+            for b in range(0, 360, 40):
+                temp = Entry(root)
+                temp.place(x=a, y=b, width=40, height=40)
+                entries.append(temp)
 
 
 def setWindow(root):
