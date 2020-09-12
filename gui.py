@@ -8,9 +8,10 @@ class EntrySquare:
         self.value = StringVar()
         self.input = Entry(root, textvariable=self.value, width=4, bg=color,
                            borderwidth=0, highlightcolor='yellow', highlightthickness=1,
-                           cursor='arrow', highlightbackground='black')
+                           cursor='arrow', highlightbackground='black',
+                           font="Helvetica", justify="center")
 
-        self.input.grid(row=row, column=col, ipadx=10, ipady=14)
+        self.input.grid(row=row, column=col, ipadx=5, ipady=10)
 
     def getValue(self):
         if not self.isValidNum(self.input.get()):
