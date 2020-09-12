@@ -81,7 +81,9 @@ class GUIWindow:
                 self.sudoku[i][j].setValue(completed[i][j])
 
     def clearSudoku(self):
-        print("Implement later")
+        for i in range(9):
+            for j in range(9):
+                self.sudoku[i][j].setValue('')
 
 
 def setWindow(root):
