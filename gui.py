@@ -2,14 +2,36 @@ from tkinter import *
 from ctypes import *
 
 
+class EntrySquare:
+    def __init__(self, root, row, col, color):
+        self.value = StringVar()
+        self.input = Entry(root, textvariable=self.value, width=4, bg=color,
+                           borderwidth=0, highlightcolor='yellow', highlightthickness=1,
+                           cursor='arrow', highlightbackground='black')
+
+        self.input.grid(row=row, column=col, ipadx=10, ipady=14)
+
+    def getValue(self):
+        if not self.isValidNum(self.input.get()):
+            return 0
+        return int(self.input.get())
+
+    def setValue(self, new_value):
+        self.value.set(new_value)
+
+    def isValidNum(self, str):
+        if str in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            return True
+        return False
+
+
 class GUIWindow:
     def __init__(self, root):
+        self.root = root
         self.sudoku = []
-        for i in range(1, 10):
-            self.sudoku += [[0, 0, 0, 0, 0, 0, 0, 0, 0]]
-
-        for i in range(0, 9):
-            for j in range(0, 9):
+        for i in range(9):
+            temp_row = []
+            for j in range(9):
                 if (i < 3 or i > 5) and (j < 3 or j > 5):
                     color = 'gray'
                 elif i in [3, 4, 5] and j in [3, 4, 5]:
@@ -17,14 +39,27 @@ class GUIWindow:
                 else:
                     color = 'white'
 
-                self.sudoku[i][j] = Entry(root, width="4", bg=color, cursor='arrow', borderwidth=0,
-                                          highlightcolor='yellow', highlightthickness=1, highlightbackground='black')
-                self.sudoku[i][j].grid(row=i, column=j, ipadx=10, ipady=14)
+                temp_row += [EntrySquare(root, i+1, j, color)]
+            self.sudoku.append(temp_row)
 
-    def isValidNum(S):
-        if S in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
-            return True
-        return False
+        self.solve = Button(root, text="Solve", command=self.solveSudoku)
+        self.info = Button(root, text="Info")
+        self.new = Button(root, text="New", command=self.clearSudoku)
+
+        self.solve.grid(row=3, column=9)
+        self.info.grid(row=5, column=9)
+        self.new.grid(row=7, column=9)
+
+    def solveSudoku(self):
+        matrix = []
+        for i in range(9):
+            temp_row = []
+            for j in range(9):
+                temp_row.append(int(self.sudoku[i][j].getValue()))
+            matrix.append(temp_row)
+
+    def clearSudoku(self):
+        print("Implement later")
 
 
 def setWindow(root):
