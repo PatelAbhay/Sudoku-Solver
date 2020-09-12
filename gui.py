@@ -18,9 +18,6 @@ class EntrySquare:
             return 0
         return int(self.input.get())
 
-    def setValue(self, new_value):
-        self.value.set(new_value)
-
     def isValidNum(self, str):
         if str in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
             return True
@@ -79,12 +76,12 @@ class GUIWindow:
 
         for i in range(9):
             for j in range(9):
-                self.sudoku[i][j].setValue(completed[i][j])
+                self.sudoku[i][j].value.set(completed[i][j])
 
     def clearSudoku(self):
         for i in range(9):
             for j in range(9):
-                self.sudoku[i][j].setValue('')
+                self.sudoku[i][j].value.set('')
 
 
 def setWindow(root):
