@@ -1,5 +1,6 @@
 from tkinter import *
 from ctypes import *
+import ctypes
 
 
 class EntrySquare:
@@ -50,13 +51,34 @@ class GUIWindow:
         self.info.grid(row=5, column=9)
         self.new.grid(row=7, column=9)
 
+    def convertToCArray(self, board):
+        arr = (ctypes.c_int * 81)(*board)
+        return arr
+
+    def generateCompletedBoard(self, arr):
+        finished = []
+        for i in range(0, 9):
+            temp_list = []
+            for j in range(0, 9):
+                temp_list.append(arr[9*i+j])
+            finished.append(temp_list)
+        return finished
+
     def solveSudoku(self):
         matrix = []
         for i in range(9):
-            temp_row = []
             for j in range(9):
-                temp_row.append(int(self.sudoku[i][j].getValue()))
-            matrix.append(temp_row)
+                matrix.append(int(self.sudoku[i][j].getValue()))
+
+        c_array = self.convertToCArray(matrix)
+        execute = CDLL("./solver.so")
+        execute.solve_sudoku(c_array, 0)
+
+        completed = self.generateCompletedBoard(c_array)
+
+        for i in range(9):
+            for j in range(9):
+                self.sudoku[i][j].setValue(completed[i][j])
 
     def clearSudoku(self):
         print("Implement later")
