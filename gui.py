@@ -70,7 +70,7 @@ class GUIWindow:
 
         c_array = self.convertToCArray(matrix)
         execute = CDLL("./solver.so")
-        execute.solve_sudoku(c_array, 0)
+        execute.solve_sudoku(c_array)
 
         completed = self.generateCompletedBoard(c_array)
 

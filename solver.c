@@ -117,7 +117,7 @@ int is_valid(int sudoku[9][9])
 }
 
 //Solves the sudoku
-void solve_sudoku(int sudoku[9][9], int depth)
+void solve_sudoku(int sudoku[9][9])
 {
     if (is_valid(sudoku) == 1)
         return;
@@ -138,7 +138,7 @@ void solve_sudoku(int sudoku[9][9], int depth)
                                 if (check_square(sudoku, row, col, value) == 0)
                                 {
                                     sudoku[row][col] = value;
-                                    solve_sudoku(sudoku, depth);
+                                    solve_sudoku(sudoku);
                                     if (not_solved(sudoku) == 1)
                                     {
                                         sudoku[row][col] = 0;
