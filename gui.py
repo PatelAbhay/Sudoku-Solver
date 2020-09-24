@@ -42,11 +42,9 @@ class GUIWindow:
             self.sudoku.append(temp_row)
 
         self.solve = Button(root, text="Solve", command=self.solveSudoku)
-        self.info = Button(root, text="Info")
         self.new = Button(root, text="New", command=self.clearSudoku)
 
         self.solve.grid(row=3, column=9)
-        self.info.grid(row=5, column=9)
         self.new.grid(row=7, column=9)
 
     def convertToCArray(self, board):
